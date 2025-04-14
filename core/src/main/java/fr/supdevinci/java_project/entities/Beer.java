@@ -9,8 +9,9 @@ public class Beer {
     private Vector2 velocity;
     private Texture texture;
 
-    private static float GRAVITY = -20;
+    private float GRAVITY = -90;
     private static final float GROUND_Y = 100;
+    private static final float MAX_Y = 200;
 
     public Beer(float x, float y) {
         position = new Vector2(x, y);
@@ -27,17 +28,15 @@ public class Beer {
             position.y = GROUND_Y;
             velocity.y = 0;
         }
+
+        if (position.y >= MAX_Y) {
+            GRAVITY = -GRAVITY;
+        }
     }
 
-    public void jump() throws InterruptedException {
+    public void jump() {
         if (position.y == GROUND_Y) {
-            try {
-                GRAVITY = -GRAVITY;
-                Thread.sleep(1000);
-                GRAVITY = -GRAVITY;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            GRAVITY = -GRAVITY;
         }
     }
 
