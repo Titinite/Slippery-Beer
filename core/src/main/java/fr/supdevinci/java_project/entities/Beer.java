@@ -5,38 +5,37 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Beer {
+    private static final float GROUND_Y = 140;
+    private static final float JUMP_VELOCITY = 450f;
+    private static final float GRAVITY = -1000f;
+
     private Vector2 position;
     private Vector2 velocity;
     private Texture texture;
 
-    private float GRAVITY = -90;
-    private static final float GROUND_Y = 100;
-    private static final float MAX_Y = 200;
-
     public Beer(float x, float y) {
-        position = new Vector2(x, y);
-        velocity = new Vector2(0, 0);
-        texture = new Texture("images/beer.png");
+        this.position = new Vector2(x, y);
+        this.velocity = new Vector2(0, 0);
+        this.texture = new Texture("images/beer.png");
     }
 
     public void update(float deltaTime) {
-        velocity.add(0, GRAVITY);
-        velocity.scl(deltaTime);
-        position.add(0, velocity.y);
+        // Application de la gravité
+        velocity.y += GRAVITY * deltaTime;
 
+        // Mise à jour de la position
+        position.y += velocity.y * deltaTime;
+
+        // Gestion du sol
         if (position.y < GROUND_Y) {
             position.y = GROUND_Y;
             velocity.y = 0;
         }
-
-        if (position.y >= MAX_Y) {
-            GRAVITY = -GRAVITY;
-        }
     }
 
     public void jump() {
-        if (position.y == GROUND_Y) {
-            GRAVITY = -GRAVITY;
+        if (position.y <= GROUND_Y + 0.5f) {
+            velocity.y = JUMP_VELOCITY;
         }
     }
 
