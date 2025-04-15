@@ -8,9 +8,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
 import fr.supdevinci.java_project.Main;
 import fr.supdevinci.java_project.entities.Beer;
+import fr.supdevinci.java_project.entities.Ennemy;
+import fr.supdevinci.java_project.utils.Constants;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Random;
 
 public class GameScreen implements Screen {
 
@@ -24,9 +31,21 @@ public class GameScreen implements Screen {
     private static final int VIRTUAL_WIDTH = 1280;
     private static final int VIRTUAL_HEIGHT = 720;
 
+    private final ArrayList<Ennemy> ennemies = new ArrayList<>();
+    private float spawnTimer = 0;
+    private float nextSpawnIn = 0;
+    private final float spawnIntervalMin = 5;
+    private final float spawnIntervalMax = 12;
+    private final Random random = new Random();
+
+
     public GameScreen(Main game) {
         this.game = game;
     }
+
+    private float getRandomSpawnInterval() {
+        return spawnIntervalMin + random.nextFloat() * (spawnIntervalMax - spawnIntervalMin);
+    }    
 
     @Override
     public void show() {
@@ -36,15 +55,19 @@ public class GameScreen implements Screen {
         camera.position.set(VIRTUAL_WIDTH / 2f, VIRTUAL_HEIGHT / 2f, 0);
         camera.update();
 
+        nextSpawnIn = getRandomSpawnInterval();
+
+
         beer = new Beer(100, 200);
         Texture backgroundTex = new Texture("images/background.png");
         Texture barTex = new Texture("images/bar.png");
 
+        float backgroundY = 0;
         float barY = VIRTUAL_HEIGHT - barTex.getHeight() - 250;
 
         parallax = new ParallaxBackground(Arrays.asList(
-            new ParallaxLayer(backgroundTex, 20f, 0),
-            new ParallaxLayer(barTex, 60f, barY)
+            new ParallaxLayer(backgroundTex, 75, backgroundY),
+            new ParallaxLayer(barTex, Constants.ENNEMY_SPEED, barY)
         ));
     }
 
@@ -57,6 +80,34 @@ public class GameScreen implements Screen {
         beer.update(delta);
         parallax.update(delta);
 
+        spawnTimer += delta;
+        if (spawnTimer >= nextSpawnIn) {
+            spawnTimer = 0;
+            nextSpawnIn = getRandomSpawnInterval();
+
+            int index = 1 + random.nextInt(5);
+            float spawnX = VIRTUAL_WIDTH + 50;
+            Ennemy ennemy = new Ennemy(spawnX, Constants.ENNEMY_Y, index);
+            ennemies.add(ennemy);
+        }
+
+        Iterator<Ennemy> iterator = ennemies.iterator();
+        while (iterator.hasNext()) {
+            Ennemy ennemy = iterator.next();
+            ennemy.update(delta);
+            if (ennemy.getX() < Constants.DESPAWN_ENNEMY_ZONE) {
+                ennemy.dispose();
+                iterator.remove();
+            }
+        }
+
+        for (Ennemy ennemy : ennemies) {
+            if (ennemy.getBounds().overlaps(beer.getBounds())) {
+                System.out.println("Collision détectée !");
+                // gérer la fin de partie ici
+            }
+        }
+        
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
@@ -66,6 +117,9 @@ public class GameScreen implements Screen {
         game.batch.begin();
         parallax.render(game.batch, VIRTUAL_HEIGHT);
         beer.render(game.batch);
+        for (Ennemy ennemy : ennemies) {
+            ennemy.render(game.batch);
+        }
         game.batch.end();
     }
 
@@ -82,5 +136,9 @@ public class GameScreen implements Screen {
     public void dispose() {
         beer.dispose();
         parallax.dispose();
+        for (Ennemy ennemy : ennemies) {
+            ennemy.dispose();
+        }
+        ennemies.clear();
     }
 }
