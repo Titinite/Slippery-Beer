@@ -13,6 +13,7 @@ import fr.supdevinci.java_project.Main;
 import fr.supdevinci.java_project.entities.Beer;
 import fr.supdevinci.java_project.entities.Ennemy;
 import fr.supdevinci.java_project.utils.Constants;
+import fr.supdevinci.java_project.screens.GameOverScreen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +46,7 @@ public class GameScreen implements Screen {
 
     private float getRandomSpawnInterval() {
         return spawnIntervalMin + random.nextFloat() * (spawnIntervalMax - spawnIntervalMin);
-    }    
+    }
 
     @Override
     public void show() {
@@ -103,11 +104,10 @@ public class GameScreen implements Screen {
 
         for (Ennemy ennemy : ennemies) {
             if (ennemy.getBounds().overlaps(beer.getBounds())) {
-                System.out.println("Collision détectée !");
-                // gérer la fin de partie ici
+                GameScreenManager.setScreen(new GameOverScreen());
             }
         }
-        
+
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
