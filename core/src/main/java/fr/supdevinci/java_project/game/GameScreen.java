@@ -35,8 +35,8 @@ public class GameScreen implements Screen {
     private final ArrayList<Ennemy> ennemies = new ArrayList<>();
     private float spawnTimer = 0;
     private float nextSpawnIn = 0;
-    private final float spawnIntervalMin = 5;
-    private final float spawnIntervalMax = 12;
+    private final float spawnIntervalMin = 2;
+    private final float spawnIntervalMax = 5;
     private final Random random = new Random();
 
 

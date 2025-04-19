@@ -3,6 +3,7 @@ package fr.supdevinci.java_project;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import fr.supdevinci.java_project.game.GameScreen;
+import fr.supdevinci.java_project.game.GameScreenManager;
 
 public class Main extends Game {
 
@@ -11,6 +12,7 @@ public class Main extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
+        GameScreenManager.init(this);
         setScreen(new GameScreen(this));
     }
 

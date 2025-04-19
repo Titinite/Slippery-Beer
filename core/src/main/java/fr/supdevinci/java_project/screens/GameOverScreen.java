@@ -1,14 +1,22 @@
 package fr.supdevinci.java_project.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+
+import fr.supdevinci.java_project.Main;
+import fr.supdevinci.java_project.game.GameScreen;
+import fr.supdevinci.java_project.game.GameScreenManager;
 
 public class GameOverScreen implements Screen {
 
+    private static Game game;
     SpriteBatch batch;
     BitmapFont font;
 
@@ -26,8 +34,9 @@ public class GameOverScreen implements Screen {
         batch.begin();
         font.setColor(Color.RED);
         font.getData().setScale(3);
-        font.draw(batch, "Game Over", Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f);
-        font.draw(batch, "Press SPACE to Restart", Gdx.graphics.getWidth() / 2f - 150, Gdx.graphics.getHeight() / 2f - 50);
+        GlyphLayout title = new GlyphLayout();
+        title.setText(font, "Game Over");
+        font.draw(batch, title, (Gdx.graphics.getWidth() - title.width) / 2, Gdx.graphics.getHeight() / 2 + title.height);
         batch.end();
     }
 

@@ -26,14 +26,9 @@ public class Beer {
     public void update(float deltaTime) {
 
         bounds.setPosition(position.x, position.y);
-
-        // Application de la gravité
         velocity.y += Constants.GRAVITY * deltaTime;
-
-        // Mise à jour de la position
         position.y += velocity.y * deltaTime;
 
-        // Gestion du sol
         if (position.y < Constants.GROUND_Y) {
             position.y = Constants.GROUND_Y;
             velocity.y = 0;
@@ -57,5 +52,5 @@ public class Beer {
     public Rectangle getBounds() {
         return bounds;
     }
-    
+
 }

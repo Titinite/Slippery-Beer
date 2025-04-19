@@ -18,7 +18,7 @@ public class Ennemy {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
         texture = new Texture("images/ennemy" + imageIndex + ".png");
-        bounds = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
+        bounds = new Rectangle(x, y, texture.getWidth()-10, texture.getHeight()-5);
 
     }
 
@@ -44,10 +44,10 @@ public class Ennemy {
 
     public float getX() {
         return position.x;
-    }    
+    }
 
     public Rectangle getBounds() {
         return bounds;
     }
-    
+
 }
