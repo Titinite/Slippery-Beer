@@ -2,7 +2,6 @@ package fr.supdevinci.java_project.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Screen;
@@ -10,16 +9,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
-import fr.supdevinci.java_project.Main;
-import fr.supdevinci.java_project.game.GameScreen;
-import fr.supdevinci.java_project.game.GameScreenManager;
+import fr.supdevinci.java_project.utils.Constants;
 
+/**
+ * Écran de fin de jeu affichant le message "Game Over".
+ */
 public class GameOverScreen implements Screen {
-
-    private static Game game;
     SpriteBatch batch;
     BitmapFont font;
-    private int score;
 
     @Override
     public void show() {
@@ -33,13 +30,26 @@ public class GameOverScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+
         font.setColor(Color.RED);
         font.getData().setScale(3);
+
         GlyphLayout title = new GlyphLayout();
-        title.setText(font, "Game Over");
-        font.draw(batch, title, (Gdx.graphics.getWidth() - title.width) / 2, Gdx.graphics.getHeight() / 2 + title.height);
-        
+        title.setText(font, Constants.GAME_OVER_TEXT);
+        drawCenteredText(title);
+
         batch.end();
+    }
+
+    /**
+     * Méthode utilitaire pour afficher le texte centré à l'écran.
+     *
+     * @param glyphLayout Le GlyphLayout contenant le texte à afficher
+     */
+    private void drawCenteredText(GlyphLayout glyphLayout) {
+        float x = (Gdx.graphics.getWidth() - glyphLayout.width) / 2;
+        float y = (Gdx.graphics.getHeight() + glyphLayout.height) / 2;
+        font.draw(batch, glyphLayout, x, y);
     }
 
     @Override public void resize(int width, int height) {}
