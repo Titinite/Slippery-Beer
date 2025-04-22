@@ -17,8 +17,8 @@ public class Constants {
     public static final float JUMP_TOLERANCE = 0.5f;
 
     // Ennemy
-    public static final float SPAWN_INTERVAL_MIN = 2;
-    public static final float SPAWN_INTERVAL_MAX = 5;
+    public static final float SPAWN_INTERVAL_MIN = 1.5f;
+    public static final float SPAWN_INTERVAL_MAX = 4;
     public static final int ENNEMY_SPEED = 250;
     public static final int DESPAWN_ENNEMY_ZONE = -150;
     public static final int HITBOX_MARGIN_WIDTH = 15;
