@@ -22,7 +22,6 @@ public class Player {
     }
 
     public void update(float deltaTime) {
-
         bounds.setPosition(position.x, position.y);
         velocity.y += Constants.GRAVITY * deltaTime;
         position.y += velocity.y * deltaTime;
@@ -34,7 +33,7 @@ public class Player {
     }
 
     public void jump() {
-        if (position.y <= Constants.GROUND_Y + 0.5f) {
+        if (position.y <= Constants.GROUND_Y + Constants.JUMP_TOLERANCE) {
             velocity.y = Constants.JUMP_VELOCITY;
         }
     }
@@ -50,5 +49,4 @@ public class Player {
     public Rectangle getBounds() {
         return bounds;
     }
-
 }
