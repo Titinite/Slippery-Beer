@@ -11,7 +11,7 @@ import fr.supdevinci.java_project.utils.Constants;
  * Représente le joueur sous forme de bière dans le jeu.
  * Gère la physique de saut, la position, le rendu et la collision avec le comptoir.
  */
-public class Player {
+public class Player implements Entities {
 
     private Vector2 position;
     private Vector2 velocity;

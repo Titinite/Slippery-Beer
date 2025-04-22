@@ -5,14 +5,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import com.sun.org.apache.bcel.internal.Const;
 import fr.supdevinci.java_project.utils.Constants;
 
 /**
  * Représente un ennemi que le joueur doit éviter.
  * Se déplace horizontalement vers la gauche.
  */
-public class Ennemy {
+public class Ennemy implements Entities {
     private Vector2 position;
     private Vector2 velocity;
     private Texture texture;
