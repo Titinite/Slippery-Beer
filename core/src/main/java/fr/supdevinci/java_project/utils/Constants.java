@@ -21,9 +21,12 @@ public class Constants {
     public static final float SPAWN_INTERVAL_MAX = 5;
     public static final int ENNEMY_SPEED = 250;
     public static final int DESPAWN_ENNEMY_ZONE = -150;
-    public static final int HITBOX_MARGIN_WIDTH = 10;
-    public static final int HITBOX_MARGIN_HEIGHT = 5;
+    public static final int HITBOX_MARGIN_WIDTH = 15;
+    public static final int HITBOX_MARGIN_HEIGHT = 10;
 
     // Score
     public static final int SCORE_MARGIN = 25;
+
+    // Game Over
+    public static final String GAME_OVER_TEXT = "Game Over";
 }
