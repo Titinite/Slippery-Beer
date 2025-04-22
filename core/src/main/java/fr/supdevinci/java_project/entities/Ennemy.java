@@ -19,12 +19,10 @@ public class Ennemy {
         velocity = new Vector2(0, 0);
         texture = new Texture("images/ennemy" + imageIndex + ".png");
         bounds = new Rectangle(x, y, texture.getWidth()-10, texture.getHeight()-5);
-
     }
 
     public void update(float deltaTime) {
         bounds.setPosition(position.x, position.y);
-
 
         position.x -= Constants.ENNEMY_SPEED * deltaTime;
         position.add(velocity.x, 0);

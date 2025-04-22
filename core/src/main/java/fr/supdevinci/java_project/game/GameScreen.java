@@ -3,14 +3,18 @@ package fr.supdevinci.java_project.game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import fr.supdevinci.java_project.Main;
-import fr.supdevinci.java_project.entities.Beer;
+import fr.supdevinci.java_project.entities.Player;
 import fr.supdevinci.java_project.entities.Ennemy;
 import fr.supdevinci.java_project.utils.Constants;
 import fr.supdevinci.java_project.screens.GameOverScreen;
@@ -23,7 +27,7 @@ import java.util.Random;
 public class GameScreen implements Screen {
 
     private final Main game;
-    private Beer beer;
+    private Player beer;
     private ParallaxBackground parallax;
 
     private OrthographicCamera camera;
@@ -38,6 +42,9 @@ public class GameScreen implements Screen {
     private final float spawnIntervalMin = 2;
     private final float spawnIntervalMax = 5;
     private final Random random = new Random();
+
+    private BitmapFont font;
+    public int score = 0;
 
 
     public GameScreen(Main game) {
@@ -56,10 +63,11 @@ public class GameScreen implements Screen {
         camera.position.set(VIRTUAL_WIDTH / 2f, VIRTUAL_HEIGHT / 2f, 0);
         camera.update();
 
+        font = new BitmapFont();
+
         nextSpawnIn = getRandomSpawnInterval();
 
-
-        beer = new Beer(100, 200);
+        beer = new Player(100, 200);
         Texture backgroundTex = new Texture("images/background.png");
         Texture barTex = new Texture("images/bar.png");
 
@@ -90,6 +98,8 @@ public class GameScreen implements Screen {
             float spawnX = VIRTUAL_WIDTH + 50;
             Ennemy ennemy = new Ennemy(spawnX, Constants.ENNEMY_Y, index);
             ennemies.add(ennemy);
+
+            score++;
         }
 
         Iterator<Ennemy> iterator = ennemies.iterator();
@@ -120,6 +130,9 @@ public class GameScreen implements Screen {
         for (Ennemy ennemy : ennemies) {
             ennemy.render(game.batch);
         }
+        font.setColor(Color.WHITE);
+        font.getData().setScale(4);
+        font.draw(game.batch, "Score: " + score, 25, VIRTUAL_HEIGHT - 25);
         game.batch.end();
     }
 

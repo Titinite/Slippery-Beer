@@ -7,16 +7,14 @@ import com.badlogic.gdx.math.Vector2;
 
 import fr.supdevinci.java_project.utils.Constants;
 
-public class Beer {
+public class Player {
 
     private Vector2 position;
     private Vector2 velocity;
     private Texture texture;
-
     private Rectangle bounds;
 
-
-    public Beer(float x, float y) {
+    public Player(float x, float y) {
         this.position = new Vector2(x, y);
         this.velocity = new Vector2(0, 0);
         this.texture = new Texture("images/beer.png");

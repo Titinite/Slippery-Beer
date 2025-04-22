@@ -19,6 +19,7 @@ public class GameOverScreen implements Screen {
     private static Game game;
     SpriteBatch batch;
     BitmapFont font;
+    private int score;
 
     @Override
     public void show() {
@@ -37,6 +38,7 @@ public class GameOverScreen implements Screen {
         GlyphLayout title = new GlyphLayout();
         title.setText(font, "Game Over");
         font.draw(batch, title, (Gdx.graphics.getWidth() - title.width) / 2, Gdx.graphics.getHeight() / 2 + title.height);
+        
         batch.end();
     }
 
