@@ -8,7 +8,7 @@ public class Constants {
     public static final int VIRTUAL_WIDTH = 1280;
     public static final int VIRTUAL_HEIGHT = 720;
 
-    // Items
+    // Entities
     public static final int GROUND_Y = 140;
 
     // Player

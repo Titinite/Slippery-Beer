@@ -25,10 +25,10 @@ public class Player implements Entities {
      * @param y position Y initiale
      */
     public Player(float x, float y, Texture texture) {
-        this.position = new Vector2(x, y);
+        this.position = new Vector2(x, Math.max(Constants.GROUND_Y, y));
         this.velocity = new Vector2(0, 0);
         this.texture = texture;
-        bounds = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
+        bounds = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
     }
 
     /**
