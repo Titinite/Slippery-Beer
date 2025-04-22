@@ -1,5 +1,7 @@
 package fr.supdevinci.java_project.utils;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class Constants {
 
     // Camera de jeu
@@ -10,6 +12,7 @@ public class Constants {
     public static final int GROUND_Y = 140;
 
     // Player
+    public static final Texture PLAYER_TEXTURE = new Texture("images/beer.png");
     public static final int PLAYER_SPAWN_X = 100;
     public static final int PLAYER_SPAWN_Y = 200;
     public static final int GRAVITY = -1000;

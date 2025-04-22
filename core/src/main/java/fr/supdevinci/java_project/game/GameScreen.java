@@ -61,7 +61,7 @@ public class GameScreen implements Screen {
      * Initialise le joueur
      */
     private void initializeBeer() {
-        beer = new Player(Constants.PLAYER_SPAWN_X, Constants.PLAYER_SPAWN_Y);
+        beer = new Player(Constants.PLAYER_SPAWN_X, Constants.PLAYER_SPAWN_Y, Constants.PLAYER_TEXTURE);
     }
 
     /**
